@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_bloc/controllers/database_controller.dart';
 import 'package:flutter_ecommerce_bloc/models/product.dart';
 
 import '../../core/utils/assets.dart';
@@ -6,7 +7,9 @@ import '../widgets/header_of_list.dart';
 import '../widgets/list_item_home.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  final FirestoreDatabase database;
+
+  const HomePage({super.key, required this.database});
 
   @override
   Widget build(BuildContext context) {
@@ -56,19 +59,35 @@ class HomePage extends StatelessWidget {
                   onTap: () {},
                 ),
                 const SizedBox(height: 8.0),
-                SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: dummyProducts.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListItemHome(
-                      product: dummyProducts[index],
-                      isNew: false,
-                    );
-                  },
-                ),
-                ),
+                StreamBuilder<List<Product>>(
+                    stream: database.salesProductsStream(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.active) {
+                        final List<Product>? salesProducts = snapshot.data;
+                        if (salesProducts == null) {
+                          return const Center(
+                              child: SizedBox(
+                                  height: 300,
+                                  child: Text('No Data Available')));
+                        }
+                        return SizedBox(
+                          height: 300,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: salesProducts.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ListItemHome(
+                                product: salesProducts[index],
+                                isNew: false,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return const SizedBox(
+                          height: 300,
+                          child: Center(child: CircularProgressIndicator()));
+                    }),
                 const SizedBox(height: 16.0),
                 HeaderOfList(
                   onTap: () {},
@@ -76,19 +95,35 @@ class HomePage extends StatelessWidget {
                   subTitle: "You've never seen it before!",
                 ),
                 const SizedBox(height: 8.0),
-                SizedBox(
-                  height: 300,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: dummyProducts.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return ListItemHome(
-                        product: dummyProducts[index],
-                        isNew: true,
-                      );
-                    },
-                  ),
-                ),
+                StreamBuilder<List<Product>>(
+                    stream: database.newProductsStream(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.active) {
+                        final List<Product>? newProducts = snapshot.data;
+                        if (newProducts == null) {
+                          return const Center(
+                              child: SizedBox(
+                                  height: 300,
+                                  child: Text('No Data Available')));
+                        }
+                        return SizedBox(
+                          height: 300,
+                          child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: newProducts.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return ListItemHome(
+                                product: newProducts[index],
+                                isNew: true,
+                              );
+                            },
+                          ),
+                        );
+                      }
+                      return const SizedBox(
+                          height: 300,
+                          child: Center(child: CircularProgressIndicator()));
+                    }),
                 const SizedBox(height: 50),
               ],
             ),

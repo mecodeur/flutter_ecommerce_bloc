@@ -12,21 +12,22 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = BlocProvider.of<AuthBloc>(context);
     return StreamBuilder<User?>(
-      stream: auth.authBase.authStateChanges(),
-      builder: (context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.active){
-          final user = snapshot.data;
-          if(user == null){
-            return const AuthPage();
+        stream: auth.authBase.authStateChanges(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.active) {
+            final user = snapshot.data;
+            if (user == null) {
+              return const AuthPage();
+            }
+            return BottomNavBar(
+              uid: user.uid,
+            );
           }
-          return const BottomNavBar();
-        }
-        return const Scaffold(
-          body: Center(
-            child: CircularProgressIndicator(),
-          ),
-        );
-      }
-    );
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
+        });
   }
 }

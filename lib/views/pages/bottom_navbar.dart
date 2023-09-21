@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_bloc/controllers/database_controller.dart';
 import 'package:flutter_ecommerce_bloc/views/pages/profle_page.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -7,14 +8,15 @@ import 'cart_page.dart';
 import 'home_page.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  final String uid;
+
+  const BottomNavBar({super.key, required this.uid});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
 class _BottomNavBarState extends State<BottomNavBar> {
-
   late PersistentTabController _bottomNavBarController;
   late bool _hideNavBar;
 
@@ -27,7 +29,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   List<Widget> _buildScreens() {
     return [
-      const HomePage(),
+      HomePage(
+        database: FirestoreDatabase('123'),
+      ), //uid
       Container(),
       const CartPage(),
       Container(),
@@ -104,7 +108,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle:
-        NavBarStyle.style8, // Choose the nav bar style with this property
+            NavBarStyle.style8, // Choose the nav bar style with this property
       ),
     );
   }

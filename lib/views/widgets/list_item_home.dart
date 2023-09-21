@@ -162,7 +162,7 @@ class ListItemHome extends StatelessWidget {
                             ),
                             TextSpan(
                               text:
-                                  '  ${product.price * (product.discountValue) / 100}\$',
+                                  '  ${(product.price * (product.discountValue) / 100).toStringAsFixed(2)}\$',
                               style: Theme.of(context)
                                   .textTheme
                                   .titleSmall!

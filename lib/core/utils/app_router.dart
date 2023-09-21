@@ -29,9 +29,13 @@ abstract class AppRouter {
         builder: (context, state) => const AuthPage(),
       ),
       GoRoute(
-        path: kBottomNavBarRoute,
-        builder: (context, state) => const BottomNavBar(),
-      ),
+          path: kBottomNavBarRoute,
+          builder: (context, state) {
+            final uid = state.extra! as String;
+            return BottomNavBar(
+              uid: uid,
+            );
+          }),
       GoRoute(
           path: kProductDetailsRoute,
           builder: (context, state) {
