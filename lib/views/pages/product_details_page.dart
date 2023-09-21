@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_bloc/controllers/auth_bloc/auth_bloc.dart';
+import 'package:flutter_ecommerce_bloc/core/utils/constants.dart';
+import 'package:flutter_ecommerce_bloc/models/add_to_cart_model.dart';
 
 import '../../models/product.dart';
 import '../widgets/drop_down_menu.dart';
@@ -101,7 +105,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               });
                             },
                             child: Icon(
-                              isFavorite ? Icons.favorite : Icons.favorite_border,
+                              isFavorite
+                                  ? Icons.favorite
+                                  : Icons.favorite_border,
                               color: isFavorite ? Colors.red : Colors.black45,
                             ),
                           ),
@@ -125,7 +131,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                               .copyWith(fontWeight: FontWeight.w600),
                         ),
                       ),
-
                       SizedBox(
                         width: 90.0,
                         child: Text(
@@ -147,12 +152,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   const SizedBox(height: 16.0),
                   Text(
                     'This is a dummy description for this product! I think we will add it in the future! I need to add more lines, so I add these words just to have more than two lines!',
-                  style: Theme.of(context).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 16.0),
-                  MainButton(text: 'Add to Cart',
-                    onTap: (){
-                      //_addToCart(database);
+                  MainButton(
+                    text: 'Add to Cart',
+                    onTap: () async{
+                      await _addToCart(context);
                     },
                     hasCircularBorder: true,
                   ),
@@ -164,5 +170,21 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _addToCart(BuildContext context) async {
+    try {
+      final AddToCartModel addToCartProduct = AddToCartModel(
+        id: documentIdFromLocalData(),
+        productId: widget.product.id,
+        title: widget.product.title,
+        price: widget.product.price,
+        imgUrl: widget.product.imgUrl,
+        size: dropdownValue,
+      );
+      await BlocProvider.of<AuthBloc>(context).database.addToCart(addToCartProduct);
+    } catch (e) {
+      print(e);
+    }
   }
 }
