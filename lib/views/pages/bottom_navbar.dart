@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_bloc/controllers/database_controller.dart';
+import 'package:flutter_ecommerce_bloc/controllers/user_cart_bloc/user_cart_bloc.dart';
 import 'package:flutter_ecommerce_bloc/views/pages/profle_page.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
@@ -33,7 +35,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
         database: FirestoreDatabase('123'),
       ), //uid
       Container(),
-      const CartPage(),
+      BlocProvider<UserCartBloc>(
+        create: (context) => UserCartBloc(),
+        child: const CartPage(),
+      ),
       Container(),
       const ProfilePage(),
     ];

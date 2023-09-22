@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_bloc/controllers/auth_bloc/auth_bloc.dart';
+import 'package:flutter_ecommerce_bloc/controllers/user_cart_bloc/user_cart_bloc.dart';
+import 'package:flutter_ecommerce_bloc/core/utils/RequestState.dart';
 import 'package:flutter_ecommerce_bloc/core/utils/app_router.dart';
 import 'package:go_router/go_router.dart';
 
@@ -18,21 +20,10 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   double totalAmount = 0;
 
-  /*
-  @override
-  void didChangeDependencies() async {
-    //final myProducts = await Provider.of<Database>(context).myProductCart().first;
-    final myProducts = dummyProducts;
-    myProducts.forEach((element) {
-      setState(() {
-        totalAmount += element.price;
-      });
-    });
-  }*/
-
   @override
   Widget build(BuildContext context) {
     final authBloc = BlocProvider.of<AuthBloc>(context);
+    final userCartBloc = BlocProvider.of<UserCartBloc>(context);
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -68,6 +59,7 @@ class _CartPageState extends State<CartPage> {
                               ConnectionState.active) {
                             final List<AddToCartModel>? cartItems =
                                 snapshot.data;
+                            totalAmount = 0;
                             if (cartItems == null || cartItems.isEmpty) {
                               return Center(
                                 child: Text(
@@ -77,12 +69,16 @@ class _CartPageState extends State<CartPage> {
                                 ),
                               );
                             }
+
                             return ListView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: cartItems.length,
                               itemBuilder: (BuildContext context, int index) {
                                 final cartItem = cartItems[index];
+                                totalAmount += cartItem.price;
+                                userCartBloc.add(GetTotalAmountEvent(
+                                    userCarttotalAmout: totalAmount));
                                 return CartListItem(
                                   cartItem: cartItem,
                                 );
@@ -103,10 +99,31 @@ class _CartPageState extends State<CartPage> {
                                     color: Colors.grey,
                                   ),
                         ),
-                        Text(
-                          '190\$',
-                          // '${totalAmount.toString().substring(0, 5)}\$',
-                          style: Theme.of(context).textTheme.titleLarge,
+                        BlocConsumer<UserCartBloc, UserCartState>(
+                          listener: (context, state) {
+                            switch (state.userCartTotalAmoutState) {
+                              case RequestState.success:
+                                totalAmount =
+                                    userCartBloc.state.userCarttotalAmout;
+                                break;
+                              case RequestState.loading:
+                                totalAmount = 0;
+                                break;
+                              case RequestState.initial:
+                                totalAmount = 0;
+                                break;
+                              case RequestState.failure:
+                                totalAmount = 0;
+                                break;
+                            }
+                          },
+                          builder: (context, state) {
+                            return Text(
+                              '${userCartBloc.state.userCarttotalAmout} \$',
+                              // '${totalAmount.toString().substring(0, 5)}\$',
+                              style: Theme.of(context).textTheme.titleLarge,
+                            );
+                          },
                         ),
                       ],
                     ),
