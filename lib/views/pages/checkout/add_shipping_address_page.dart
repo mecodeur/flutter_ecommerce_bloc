@@ -9,7 +9,6 @@ import '../../widgets/main_button.dart';
 import '../../widgets/main_dialog.dart';
 
 class AddShippingAddressPage extends StatefulWidget {
-
   final ShippingAddress? shippingAddress;
 
   const AddShippingAddressPage({super.key, this.shippingAddress});

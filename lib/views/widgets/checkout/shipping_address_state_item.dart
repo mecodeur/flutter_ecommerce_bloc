@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_bloc/core/utils/app_router.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../controllers/auth_bloc/auth_bloc.dart';
 import '../../../models/shipping_address.dart';
 
 class ShippingAddressStateItem extends StatefulWidget {
   final ShippingAddress shippingAddress;
+
   const ShippingAddressStateItem({
     Key? key,
     required this.shippingAddress,
@@ -25,7 +30,7 @@ class _ShippingAddressStateItemState extends State<ShippingAddressStateItem> {
 
   @override
   Widget build(BuildContext context) {
-    //final database = Provider.of<Database>(context);
+    final database = BlocProvider.of<AuthBloc>(context).database;
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Padding(
@@ -43,14 +48,11 @@ class _ShippingAddressStateItemState extends State<ShippingAddressStateItem> {
                       ),
                 ),
                 InkWell(
-                  onTap: () => null,
-                  //Navigator.of(context).pushNamed(
-                  //                     AppRoutes.addShippingAddressRoute,
-                  //                     arguments: AddShippingAddressArgs(
-                  //                       database: database,
-                  //                       shippingAddress: widget.shippingAddress,
-                  //                     ),
-                  //                   )
+                  onTap: () {
+                    GoRouter.of(context).push(
+                        AppRouter.kAddShippingAddressRoute,
+                        extra: widget.shippingAddress);
+                  },
                   child: Text(
                     'Edit',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(
@@ -77,9 +79,9 @@ class _ShippingAddressStateItemState extends State<ShippingAddressStateItem> {
                   checkedValue = newValue!;
                 });
                 // TODO: We need to add the business logic of adding the default address (one default)
-                /*final newAddress =
+                final newAddress =
                     widget.shippingAddress.copyWith(isDefault: newValue);
-                await database.saveAddress(newAddress);*/
+                await database.saveAddress(newAddress);
               },
               activeColor: Colors.black,
               contentPadding: EdgeInsets.zero,

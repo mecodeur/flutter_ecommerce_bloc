@@ -6,11 +6,12 @@ import '../../../models/shipping_address.dart';
 
 class ShippingAddressComponent extends StatelessWidget {
   final ShippingAddress shippingAdress;
-  const ShippingAddressComponent({Key? key, required this.shippingAdress}) : super(key: key);
+
+  const ShippingAddressComponent({Key? key, required this.shippingAdress})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //final database = Provider.of<Database>(context);
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
       child: Padding(
@@ -28,11 +29,8 @@ class ShippingAddressComponent extends StatelessWidget {
                       ),
                 ),
                 InkWell(
-                  onTap: () => GoRouter.of(context).push(AppRouter.kShippingAddressesRoute),
-                  //Navigator.of(context).pushNamed(
-                  //                     AppRoutes.shippingAddressesRoute,
-                  //                     arguments: database,
-                  //                   )
+                  onTap: () => GoRouter.of(context)
+                      .push(AppRouter.kShippingAddressesRoute),
                   child: Text(
                     'Change',
                     style: Theme.of(context).textTheme.labelLarge!.copyWith(

@@ -1,4 +1,5 @@
 import 'package:flutter_ecommerce_bloc/models/product.dart';
+import 'package:flutter_ecommerce_bloc/models/shipping_address.dart';
 import 'package:flutter_ecommerce_bloc/views/pages/bottom_navbar.dart';
 import 'package:flutter_ecommerce_bloc/views/pages/checkout/add_shipping_address_page.dart';
 import 'package:flutter_ecommerce_bloc/views/pages/checkout/checkout_page.dart';
@@ -52,11 +53,15 @@ abstract class AppRouter {
         builder: (context, state) => const ShippingAddressesPage(),
       ),
       GoRoute(
-        path: kAddShippingAddressRoute,
-        builder: (context, state) {
-          return const AddShippingAddressPage();
-        }
-      ),
+          path: kAddShippingAddressRoute,
+          builder: (context, state) {
+            if (state.extra == null) {
+              return const AddShippingAddressPage();
+            }
+            final ShippingAddress shippingAddress =
+                state.extra as ShippingAddress;
+            return AddShippingAddressPage(shippingAddress: shippingAddress);
+          }),
     ],
   );
 }
