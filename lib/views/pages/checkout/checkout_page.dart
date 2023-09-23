@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_bloc/controllers/auth_bloc/auth_bloc.dart';
+import 'package:flutter_ecommerce_bloc/core/utils/app_router.dart';
 import 'package:flutter_ecommerce_bloc/models/delivery_method.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../models/shipping_address.dart';
 import '../../widgets/checkout/checkout_order_details.dart';
@@ -15,9 +19,7 @@ class CheckoutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final deliveryMethods = deliveryMethodDummy;
-
-    //
-    final shippingAddress = shippingAdressDummy.last;
+    final database = BlocProvider.of<AuthBloc>(context).database;
 
     return Scaffold(
       appBar: AppBar(
@@ -39,8 +41,39 @@ class CheckoutPage extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
 
-              ShippingAddressComponent(
-                shippingAdress: shippingAddress,
+              StreamBuilder<List<ShippingAddress>>(
+                stream: database.getShippingAddresses(),
+                builder: (context, snapshot) {
+                  if(snapshot.connectionState == ConnectionState.active){
+                    final List<ShippingAddress>? shippingAdress = snapshot.data;
+                    if( shippingAdress == null || shippingAdress.isEmpty){
+                      return Center(
+                        child: Column(
+                          children: [
+                            const Text('No Shipping Addresses!'),
+                            const SizedBox(height: 6.0),
+                            InkWell(
+                              onTap: () => GoRouter.of(context).push(AppRouter.kAddShippingAddressRoute),
+                              child: Text(
+                                'Add new one',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .labelLarge!
+                                    .copyWith(
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+                    return ShippingAddressComponent(
+                      shippingAdress: shippingAdress.first,
+                    );
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                }
               ),
               const SizedBox(height: 24.0),
               Row(

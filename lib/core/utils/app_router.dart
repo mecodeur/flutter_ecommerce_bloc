@@ -53,7 +53,9 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kAddShippingAddressRoute,
-        builder: (context, state) => const AddShippingAddressPage(),
+        builder: (context, state) {
+          return const AddShippingAddressPage();
+        }
       ),
     ],
   );

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_ecommerce_bloc/controllers/auth_bloc/auth_bloc.dart';
 
+import '../../../controllers/database_controller.dart';
 import '../../../core/utils/constants.dart';
 import '../../../models/shipping_address.dart';
 import '../../widgets/main_button.dart';
@@ -51,7 +54,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
     super.dispose();
   }
 
-  /*Future<void> saveAddress(Database database) async {
+  Future<void> saveAddress(Database database) async {
     try {
       if (_formKey.currentState!.validate()) {
         final address = ShippingAddress(
@@ -76,11 +79,11 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
               content: e.toString())
           .showAlertDialog();
     }
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
-    //final database = Provider.of<Database>(context);
+    final database = BlocProvider.of<AuthBloc>(context).database;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -168,7 +171,7 @@ class _AddShippingAddressPageState extends State<AddShippingAddressPage> {
                 MainButton(
                   text: 'Save Address',
                   onTap: () {
-                    //saveAddress(database);
+                    saveAddress(database);
                   },
                   hasCircularBorder: true,
                 ),
