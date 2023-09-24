@@ -1,4 +1,4 @@
-enum RequestState{
+enum RequestState {
   initial,
   loading,
   success,

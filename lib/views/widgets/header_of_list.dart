@@ -5,7 +5,8 @@ class HeaderOfList extends StatelessWidget {
   final VoidCallback? onTap;
   final String subTitle;
 
-  const HeaderOfList({super.key, required this.title, required this.subTitle, this.onTap});
+  const HeaderOfList(
+      {super.key, required this.title, required this.subTitle, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,13 @@ class HeaderOfList extends StatelessWidget {
                   .headlineSmall!
                   .copyWith(fontWeight: FontWeight.bold),
             ),
-            Text(subTitle, style: Theme.of(context).textTheme.titleMedium!.copyWith(color: Colors.grey),),
+            Text(
+              subTitle,
+              style: Theme.of(context)
+                  .textTheme
+                  .titleMedium!
+                  .copyWith(color: Colors.grey),
+            ),
           ],
         ),
         InkWell(

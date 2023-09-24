@@ -161,10 +161,12 @@ class _AuthPageState extends State<AuthPage> {
 
   void _submit(AuthFormType authType, AuthBloc myBloc) {
     if (authType == AuthFormType.login) {
-      myBloc.add(LoginEvent(email: email!, password: password!, context: context));
+      myBloc.add(
+          LoginEvent(email: email!, password: password!, context: context));
       if (!mounted) return;
     } else {
-      myBloc.add(RegisterEvent(email: email!, password: password!, context: context));
+      myBloc.add(
+          RegisterEvent(email: email!, password: password!, context: context));
       if (!mounted) return;
     }
   }

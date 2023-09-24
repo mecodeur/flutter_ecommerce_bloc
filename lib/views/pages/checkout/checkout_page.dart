@@ -40,41 +40,41 @@ class CheckoutPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               const SizedBox(height: 8.0),
-
               StreamBuilder<List<ShippingAddress>>(
-                stream: database.getShippingAddresses(),
-                builder: (context, snapshot) {
-                  if(snapshot.connectionState == ConnectionState.active){
-                    final List<ShippingAddress>? shippingAdress = snapshot.data;
-                    if( shippingAdress == null || shippingAdress.isEmpty){
-                      return Center(
-                        child: Column(
-                          children: [
-                            const Text('No Shipping Addresses!'),
-                            const SizedBox(height: 6.0),
-                            InkWell(
-                              onTap: () => GoRouter.of(context).push(AppRouter.kAddShippingAddressRoute),
-                              child: Text(
-                                'Add new one',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .labelLarge!
-                                    .copyWith(
-                                  color: Colors.redAccent,
+                  stream: database.getShippingAddresses(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.active) {
+                      final List<ShippingAddress>? shippingAdress =
+                          snapshot.data;
+                      if (shippingAdress == null || shippingAdress.isEmpty) {
+                        return Center(
+                          child: Column(
+                            children: [
+                              const Text('No Shipping Addresses!'),
+                              const SizedBox(height: 6.0),
+                              InkWell(
+                                onTap: () => GoRouter.of(context)
+                                    .push(AppRouter.kAddShippingAddressRoute),
+                                child: Text(
+                                  'Add new one',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .labelLarge!
+                                      .copyWith(
+                                        color: Colors.redAccent,
+                                      ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
+                            ],
+                          ),
+                        );
+                      }
+                      return ShippingAddressComponent(
+                        shippingAdress: shippingAdress.first,
                       );
                     }
-                    return ShippingAddressComponent(
-                      shippingAdress: shippingAdress.first,
-                    );
-                  }
-                  return const Center(child: CircularProgressIndicator());
-                }
-              ),
+                    return const Center(child: CircularProgressIndicator());
+                  }),
               const SizedBox(height: 24.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,8 +109,8 @@ class CheckoutPage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (_, i) => Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: DeliveryMethodItem(
-                        deliveryMethod: deliveryMethods[i]),
+                    child:
+                        DeliveryMethodItem(deliveryMethod: deliveryMethods[i]),
                   ),
                 ),
               ),

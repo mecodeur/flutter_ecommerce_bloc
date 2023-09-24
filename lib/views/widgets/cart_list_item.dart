@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../../models/add_to_cart_model.dart';
 
 class CartListItem extends StatelessWidget {
-
   final AddToCartModel cartItem;
   const CartListItem({super.key, required this.cartItem});
 
@@ -31,7 +30,8 @@ class CartListItem extends StatelessWidget {
             ),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -39,8 +39,8 @@ class CartListItem extends StatelessWidget {
                     Text(
                       cartItem.title,
                       style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        fontWeight: FontWeight.w600,
-                      ),
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                     const SizedBox(height: 8.0),
                     Row(
@@ -54,16 +54,16 @@ class CartListItem extends StatelessWidget {
                                       .textTheme
                                       .bodySmall!
                                       .copyWith(
-                                    color: Colors.grey,
-                                  )),
+                                        color: Colors.grey,
+                                      )),
                               TextSpan(
                                 text: cartItem.color,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
                                     .copyWith(
-                                  color: Colors.black,
-                                ),
+                                      color: Colors.black,
+                                    ),
                               ),
                             ],
                           ),
@@ -78,16 +78,16 @@ class CartListItem extends StatelessWidget {
                                       .textTheme
                                       .bodySmall!
                                       .copyWith(
-                                    color: Colors.grey,
-                                  )),
+                                        color: Colors.grey,
+                                      )),
                               TextSpan(
                                 text: cartItem.size,
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodySmall!
                                     .copyWith(
-                                  color: Colors.black,
-                                ),
+                                      color: Colors.black,
+                                    ),
                               ),
                             ],
                           ),
@@ -100,7 +100,7 @@ class CartListItem extends StatelessWidget {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
+                  const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -116,7 +116,6 @@ class CartListItem extends StatelessWidget {
             ),
           ],
         ),
-
       ),
     );
   }

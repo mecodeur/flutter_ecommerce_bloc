@@ -4,7 +4,6 @@ import 'package:flutter_ecommerce_bloc/controllers/auth_bloc/auth_bloc.dart';
 
 import '../widgets/main_button.dart';
 
-
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -16,16 +15,17 @@ class ProfilePage extends StatelessWidget {
           children: [
             const Spacer(),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0, vertical: 20),
-              child: MainButton(text: 'Log Out', onTap: () {
-                BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
-              }),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20),
+              child: MainButton(
+                  text: 'Log Out',
+                  onTap: () {
+                    BlocProvider.of<AuthBloc>(context).add(LogOutEvent());
+                  }),
             )
           ],
         );
       },
     );
   }
-
 }

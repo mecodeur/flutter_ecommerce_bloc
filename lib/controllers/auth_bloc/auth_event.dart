@@ -20,7 +20,8 @@ class RegisterEvent extends AuthEvent {
   final String password;
   final BuildContext? context;
 
-  const RegisterEvent({required this.email, required this.password, this.context});
+  const RegisterEvent(
+      {required this.email, required this.password, this.context});
 
   @override
   List<Object> get props => [];

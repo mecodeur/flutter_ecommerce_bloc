@@ -9,12 +9,12 @@ class AuthState extends Equatable {
   final RequestState registerStateUser;
   final String registerErrorMessageUser;
 
-  const AuthState({
-    this.toggleFormTypeStateUser = AuthFormType.login,
-    this.loginStateUser = RequestState.initial,
-    this.loginErrorMessageUser = '',
-    this.registerStateUser = RequestState.initial,
-    this.registerErrorMessageUser = ''});
+  const AuthState(
+      {this.toggleFormTypeStateUser = AuthFormType.login,
+      this.loginStateUser = RequestState.initial,
+      this.loginErrorMessageUser = '',
+      this.registerStateUser = RequestState.initial,
+      this.registerErrorMessageUser = ''});
 
   AuthState copyWith({
     AuthFormType? toggleFormTypeStateUser,
@@ -25,19 +25,18 @@ class AuthState extends Equatable {
   }) {
     return AuthState(
       toggleFormTypeStateUser:
-      toggleFormTypeStateUser ?? this.toggleFormTypeStateUser,
+          toggleFormTypeStateUser ?? this.toggleFormTypeStateUser,
       loginStateUser: loginStateUser ?? this.loginStateUser,
       loginErrorMessageUser:
-      loginErrorMessageUser ?? this.loginErrorMessageUser,
+          loginErrorMessageUser ?? this.loginErrorMessageUser,
       registerStateUser: registerStateUser ?? this.registerStateUser,
       registerErrorMessageUser:
-      registerErrorMessageUser ?? this.registerErrorMessageUser,
+          registerErrorMessageUser ?? this.registerErrorMessageUser,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [
+  List<Object?> get props => [
         toggleFormTypeStateUser,
         loginStateUser,
         loginErrorMessageUser,

@@ -157,7 +157,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   const SizedBox(height: 16.0),
                   MainButton(
                     text: 'Add to Cart',
-                    onTap: () async{
+                    onTap: () async {
                       await _addToCart(context);
                     },
                     hasCircularBorder: true,
@@ -182,7 +182,9 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         imgUrl: widget.product.imgUrl,
         size: dropdownValue,
       );
-      await BlocProvider.of<AuthBloc>(context).database.addToCart(addToCartProduct);
+      await BlocProvider.of<AuthBloc>(context)
+          .database
+          .addToCart(addToCartProduct);
     } catch (e) {
       print(e);
     }

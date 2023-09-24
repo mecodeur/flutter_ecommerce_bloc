@@ -56,16 +56,17 @@ List<AddToCartModel> dummyAddToCartModel = [
     productId: "K5khmzUjaQGBAlC3c910",
     title: "Pull&Bear - Tshirt oversize",
     price: 12.99,
-    imgUrl: "https://images.asos-media.com/products/pullbear-t-shirt-oversize-beige/203001203-1-beige?\$n_640w\$&wid=513&fit=constrain",
+    imgUrl:
+        "https://images.asos-media.com/products/pullbear-t-shirt-oversize-beige/203001203-1-beige?\$n_640w\$&wid=513&fit=constrain",
     size: "M",
   ),
-
   AddToCartModel(
     id: "2",
     productId: "K5khmzUjaQGBAlC3c910",
     title: "Pull&Bear - Tshirt oversize",
     price: 12.99,
-    imgUrl: "https://images.asos-media.com/products/pullbear-t-shirt-oversize-beige/203001203-1-beige?\$n_640w\$&wid=513&fit=constrain",
+    imgUrl:
+        "https://images.asos-media.com/products/pullbear-t-shirt-oversize-beige/203001203-1-beige?\$n_640w\$&wid=513&fit=constrain",
     size: "M",
   ),
 ];

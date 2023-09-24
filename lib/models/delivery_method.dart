@@ -39,15 +39,16 @@ List<DeliveryMethod> deliveryMethodDummy = [
     id: '9vL65pivmqIey5LK8nUX',
     name: 'DHL',
     days: '7-10',
-    imgUrl: 'https://companieslogo.com/img/orig/DHL.DE-8c515c8f.png?t=1693297848',
+    imgUrl:
+        'https://companieslogo.com/img/orig/DHL.DE-8c515c8f.png?t=1693297848',
     price: 10.50,
   ),
-
   DeliveryMethod(
     id: 'DDeA9omBWUzb2aUkiJBG',
     name: 'FedEx',
     days: '2-3',
-    imgUrl: 'https://w7.pngwing.com/pngs/443/269/png-transparent-logo-brand-fedex-product-desktop-hermes-staff-text-orange-logo.png',
+    imgUrl:
+        'https://w7.pngwing.com/pngs/443/269/png-transparent-logo-brand-fedex-product-desktop-hermes-staff-text-orange-logo.png',
     price: 20.99,
   ),
 ];

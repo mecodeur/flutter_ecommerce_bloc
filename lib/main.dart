@@ -7,7 +7,7 @@ import 'package:flutter_ecommerce_bloc/services/auth.dart';
 import 'core/utils/app_router.dart';
 import 'firebase_options.dart';
 
-Future<void> main() async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -29,18 +29,13 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
-            iconTheme: IconThemeData(
-                color: Colors.black
-            ),
+            iconTheme: IconThemeData(color: Colors.black),
             elevation: 2,
           ),
           scaffoldBackgroundColor: const Color(0xFFE5E5E5),
           primaryColor: Colors.red[700],
           inputDecorationTheme: InputDecorationTheme(
-            labelStyle: Theme
-                .of(context)
-                .textTheme
-                .titleMedium,
+            labelStyle: Theme.of(context).textTheme.titleMedium,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.0),
               borderSide: const BorderSide(
@@ -77,5 +72,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

@@ -29,7 +29,7 @@ class MainDialog {
                   ? actions!
                       .map((action) => TextButton(
                             onPressed: action.values.first,
-                            child:  Text(action.keys.first),
+                            child: Text(action.keys.first),
                           ))
                       .toList()
                   : [
