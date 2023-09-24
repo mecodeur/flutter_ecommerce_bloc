@@ -124,7 +124,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          '${widget.product.title}',
+                          widget.product.title,
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!

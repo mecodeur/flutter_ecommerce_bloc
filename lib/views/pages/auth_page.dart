@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_ecommerce_bloc/controllers/auth_bloc/auth_bloc.dart';
@@ -121,7 +120,7 @@ class _AuthPageState extends State<AuthPage> {
                         });
                       },
                       child: Text(authType == AuthFormType.login
-                          ? "Don\'t have an account? Register'"
+                          ? "Don't have an account? Register'"
                           : "Have an account? Login"),
                     ),
                   ),

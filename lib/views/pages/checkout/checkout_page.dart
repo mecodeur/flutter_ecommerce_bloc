@@ -95,7 +95,7 @@ class CheckoutPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 8.0),
-              PaymentComponent(),
+              const PaymentComponent(),
               const SizedBox(height: 24.0),
               Text(
                 'Delivery method',
@@ -115,7 +115,7 @@ class CheckoutPage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 32.0),
-              CheckoutOrderDetails(),
+              const CheckoutOrderDetails(),
               const SizedBox(height: 64.0),
               MainButton(
                 text: 'Submit Order',

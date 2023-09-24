@@ -14,7 +14,7 @@ class UserCartState extends Equatable {
     double? userCarttotalAmout,
   }) {
     return UserCartState(
-      userCartTotalAmoutState: userCartState ?? this.userCartTotalAmoutState,
+      userCartTotalAmoutState: userCartState ?? userCartTotalAmoutState,
       userCarttotalAmout: userCarttotalAmout ?? this.userCarttotalAmout,
     );
   }
