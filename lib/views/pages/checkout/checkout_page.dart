@@ -41,7 +41,7 @@ class CheckoutPage extends StatelessWidget {
               ),
               const SizedBox(height: 8.0),
               StreamBuilder<List<ShippingAddress>>(
-                  stream: database.getShippingAddresses(),
+                  stream: database.getShippingAddressPrincipal(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.active) {
                       final List<ShippingAddress>? shippingAdress =

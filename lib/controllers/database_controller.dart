@@ -21,6 +21,8 @@ abstract class Database {
 
   Stream<List<ShippingAddress>> getShippingAddresses();
 
+  Stream<List<ShippingAddress>> getShippingAddressPrincipal();
+
   Future<void> saveAddress(ShippingAddress address);
 }
 
@@ -81,6 +83,15 @@ class FirestoreDatabase implements Database {
     return _service.collectionsStream(
       path: ApiPath.userShippingAddress(uid),
       builder: (data, documentId) => ShippingAddress.fromMap(data!, documentId),
+    );
+  }
+
+  @override
+  Stream<List<ShippingAddress>> getShippingAddressPrincipal() {
+    return _service.collectionsStream(
+      path: ApiPath.userShippingAddress(uid),
+      builder: (data, documentId) => ShippingAddress.fromMap(data!, documentId),
+      queryBuilder: (query) => query.where('isDefault', isEqualTo: true),
     );
   }
 
