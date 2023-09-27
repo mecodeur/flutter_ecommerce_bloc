@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_ecommerce_bloc/views/widgets/cart_menu.dart';
 
 import '../../models/add_to_cart_model.dart';
 
@@ -106,7 +108,14 @@ class CartListItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Icon(Icons.more_vert),
+                  CartMenu(
+                    builder: (_, showMenu) => CupertinoButton(
+                      onPressed: showMenu,
+                      padding: EdgeInsets.zero,
+                      pressedOpacity: 1,
+                      child: const Icon(Icons.more_vert),
+                    ),
+                  ),
                   Text(
                     '${cartItem.price}\$',
                     style: Theme.of(context).textTheme.bodyLarge,
