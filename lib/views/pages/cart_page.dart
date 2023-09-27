@@ -61,6 +61,8 @@ class _CartPageState extends State<CartPage> {
                                 snapshot.data;
                             totalAmount = 0;
                             if (cartItems == null || cartItems.isEmpty) {
+                              userCartBloc.add(const GetTotalAmountEvent(
+                                  userCarttotalAmout: 0));
                               return Center(
                                 child: Text(
                                   'No Data Available!',

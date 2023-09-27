@@ -109,6 +109,7 @@ class CartListItem extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   CartMenu(
+                    cartItem: cartItem,
                     builder: (_, showMenu) => CupertinoButton(
                       onPressed: showMenu,
                       padding: EdgeInsets.zero,

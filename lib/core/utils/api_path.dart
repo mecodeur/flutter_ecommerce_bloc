@@ -3,6 +3,8 @@ class ApiPath {
   static String user(String uid) => 'users/$uid';
   static String addToCart(String uid, String addToCartId) =>
       'users/$uid/cart/$addToCartId';
+  static String deleteFromCart(String uid, String addToCartProductId) =>
+      'users/$uid/cart/$addToCartProductId';
   static String myProductsCart(String uid) => 'users/$uid/cart/';
   static String deliveryMethods() => 'deliveryMethods/';
   static String userShippingAddress(String uid) =>

@@ -24,6 +24,8 @@ abstract class Database {
   Stream<List<ShippingAddress>> getShippingAddressPrincipal();
 
   Future<void> saveAddress(ShippingAddress address);
+
+  Future<void> deleteItemCart(AddToCartModel addToCartModel);
 }
 
 class FirestoreDatabase implements Database {
@@ -103,6 +105,16 @@ class FirestoreDatabase implements Database {
         address.id,
       ),
       data: address.toMap(),
+    );
+  }
+
+  @override
+  Future<void> deleteItemCart(AddToCartModel addToCartModel) {
+    return _service.deleteData(
+      path: ApiPath.deleteFromCart(
+        uid,
+        addToCartModel.id,
+      ),
     );
   }
 }
